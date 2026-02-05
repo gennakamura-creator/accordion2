@@ -1,89 +1,70 @@
-{\rtf1\ansi\ansicpg932\cocoartf2822
-\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
-{\colortbl;\red255\green255\blue255;}
-{\*\expandedcolortbl;;}
-\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-
-\f0\fs24 \cf0 body \{\
-  margin: 0;\
-  font-family: system-ui, sans-serif;\
-  background: #0b1220;\
-  color: #eef2ff;\
-\}\
-\
-.container \{\
-  width: min(900px, 92%);\
-  margin: auto;\
-\}\
-\
-.header \{\
-  padding: 30px 0 10px;\
-\}\
-\
-.sub \{\
-  color: #b6c0e0;\
-\}\
-\
-.card \{\
-  background: #121a2b;\
-  border-radius: 14px;\
-  padding: 20px;\
-  margin-bottom: 40px;\
-\}\
-\
-.card-title \{\
-  color: #b6c0e0;\
-  margin-bottom: 10px;\
-\}\
-\
-.acc-item \{\
-  border-top: 1px solid rgba(255,255,255,0.15);\
-\}\
-\
-.acc-trigger \{\
-  width: 100%;\
-  background: none;\
-  border: none;\
-  color: #eef2ff;\
-  padding: 14px;\
-  text-align: left;\
-  cursor: pointer;\
-  font-size: 15px;\
-  display: flex;\
-  justify-content: space-between;\
-\}\
-\
-.acc-trigger:hover \{\
-  background: rgba(255,255,255,0.05);\
-\}\
-\
-.chev \{\
-  transition: transform 0.2s;\
-\}\
-\
-.acc-trigger[aria-expanded="true"] .chev \{\
-  transform: rotate(180deg);\
-\}\
-\
-.acc-panel \{\
-  padding: 0 14px 14px;\
-\}\
-\
-.acc-content \{\
-  color: #dbe1ff;\
-\}\
-\
-.acc-item--static \{\
-  padding: 14px;\
-\}\
-\
-.acc-static-title \{\
-  font-weight: bold;\
-\}\
-\
-.acc-static-sub \{\
-  color: #b6c0e0;\
-  font-size: 14px;\
-\}\
+:root{
+  --bg:#0b1220;
+  --card:#121a2b;
+  --text:#eef2ff;
+  --muted:#b6c0e0;
+  --line:rgba(255,255,255,.14);
 }
+
+*{ box-sizing:border-box; }
+
+body{
+  margin:0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans JP", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height:1.6;
+}
+
+.container{
+  width:min(900px,92vw);
+  margin:0 auto;
+}
+
+.header{
+  padding:28px 0 10px;
+}
+
+h1{
+  margin:0;
+  font-size:24px;
+}
+
+.sub{
+  margin:8px 0 0;
+  color:var(--muted);
+}
+
+.card{
+  background: var(--card);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:18px;
+  margin:16px 0 40px;
+}
+
+.card-title{
+  margin:0 0 10px;
+  font-size:16px;
+  color:var(--muted);
+}
+
+.accordion{
+  border-top:1px solid var(--line);
+}
+
+.acc-item{
+  border-bottom:1px solid var(--line);
+}
+
+.acc-trigger{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+
+  padding:14px;
+  background:transparent;
+  border:0;
+  color:var(--te
