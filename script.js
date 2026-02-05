@@ -1,29 +1,47 @@
-{\rtf1\ansi\ansicpg932\cocoartf2822
-\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
-{\colortbl;\red255\green255\blue255;}
-{\*\expandedcolortbl;;}
-\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+(() => {
+  const accordion = document.getElementById("faqAccordion");
+  if (!accordion) return;
 
-\f0\fs24 \cf0 const accordion = document.getElementById("faqAccordion");\
-const triggers = accordion.querySelectorAll(".acc-trigger");\
-\
-function closeAll(except) \{\
-  triggers.forEach(btn => \{\
-    if (btn !== except) \{\
-      btn.setAttribute("aria-expanded", "false");\
-      document.getElementById(btn.getAttribute("aria-controls")).hidden = true;\
-    \}\
-  \});\
-\}\
-\
-triggers.forEach(btn => \{\
-  btn.addEventListener("click", () => \{\
-    const expanded = btn.getAttribute("aria-expanded") === "true";\
-    closeAll(btn);\
-\
-    btn.setAttribute("aria-expanded", String(!expanded));\
-    document.getElementById(btn.getAttribute("aria-controls")).hidden = expanded;\
-  \});\
-\});\
-}
+  const triggers = Array.from(accordion.querySelectorAll(".acc-trigger"));
+
+  function setExpanded(trigger, expanded) {
+    const panelId = trigger.getAttribute("aria-controls");
+    const panel = panelId ? document.getElementById(panelId) : null;
+
+    trigger.setAttribute("aria-expanded", String(expanded));
+    if (panel) panel.hidden = !expanded;
+  }
+
+  function closeAll(exceptTrigger) {
+    triggers.forEach((t) => {
+      if (t === exceptTrigger) return;
+      setExpanded(t, false);
+    });
+  }
+
+  triggers.forEach((trigger) => {
+    trigger.addEventListener("click", () => {
+      const isOpen = trigger.getAttribute("aria-expanded") === "true";
+
+      if (isOpen) {
+        // 開いているものを押したら閉じる
+        setExpanded(trigger, false);
+      } else {
+        // 開くときは他を閉じてから開く（同時に1つだけ）
+        closeAll(trigger);
+        setExpanded(trigger, true);
+      }
+    });
+
+    // ESCで閉じる（任意）
+    trigger.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        setExpanded(trigger, false);
+        trigger.focus();
+      }
+    });
+  });
+
+  // 初期状態の整合
+  triggers.forEach((t) => setExpanded(t, t.getAttribute("aria-expanded") === "true"));
+})();
